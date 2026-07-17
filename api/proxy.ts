@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import fetch from 'node-fetch';
 
-const TARGET_URL = 'https://example.com'; // Replace with your backend target
+const TARGET_URL = 'https://example.com'; // Replace with your backend
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const path = req.url?.replace(/^\/api\/proxy/, '') || '';
@@ -14,13 +14,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       body: req.method !== 'GET' && req.method !== 'HEAD' ? req.body : undefined,
     });
 
-    const buffer = await response.buffer();
+    const buffer = await response.arrayBuffer();
 
     res.status(response.status);
     response.headers.forEach((value, key) => {
       res.setHeader(key, value);
     });
-    res.send(buffer);
+    res.send(Buffer.from(buffer));
   } catch (err: any) {
     res.status(500).json({ error: 'Proxy error', details: err.message });
   }
