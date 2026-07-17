@@ -1,0 +1,12 @@
+{
+  "name": "vercel-proxy",
+  "version": "1.0.0",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@vercel/node": "^3.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
